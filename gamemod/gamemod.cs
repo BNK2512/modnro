@@ -1,7 +1,5 @@
 using System;
-using Chat;
-using Auto;
-using Update;
+using HarmonyLib;
 using Helper;
 
 namespace GameMod
@@ -10,20 +8,8 @@ namespace GameMod
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("GameMod started!");
-
-            ChatManager chat = new ChatManager();
-            chat.SendWelcomeMessage();
-
-            AutoController auto = new AutoController();
-            auto.ExecuteAutoTask();
-
-            UpdateManager update = new UpdateManager();
-            update.CheckUpdates();
-
-            Logger.Log("GameMod initialized successfully.");
-
-            Console.ReadLine();
+            Harmony harmony = new Harmony("BUINHIKHANG_MOD");
+            harmony.PatchAll();
         }
     }
 }

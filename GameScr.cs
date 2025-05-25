@@ -4779,17 +4779,17 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	public static bool isAutoDCTTStarted = false;
+	//public static bool isAutoDCTTStarted = false;
 
 	//vong lap
 	public override void update()
 	{
 		// memod
-		if (!isAutoDCTTStarted && !Char.isLoadingMap)
-		{
-			isAutoDCTTStarted = true;
-			StartAllAuto();
-		}
+		//if (!isAutoDCTTStarted && !Char.isLoadingMap)
+		//{
+		//	isAutoDCTTStarted = true;
+		//	StartAllAuto();
+		//}
 		if (GameCanvas.keyPressed[16])
 		{
 			GameCanvas.keyPressed[16] = false;
@@ -6837,123 +6837,123 @@ public class GameScr : mScreen, IChatable
 	}
 
 	// memod
-	public static bool dctt = false;
-	public static bool isAutoDichChuyenRunning = false;
-	public static bool alogin = true;
+	//public static bool dctt = false;
+	//public static bool isAutoDichChuyenRunning = false;
+	//public static bool alogin = true;
 
-	public static void StartAllAuto()
-	{
-		if (!isAutoDichChuyenRunning)
-		{
-			dctt = true;
-			isAutoPlay2 = true;
-			isAutoDichChuyenRunning = true;
-			new Thread(AutoDichChuyen).Start();
-		}
+	//public static void StartAllAuto()
+	//{
+	//	if (!isAutoDichChuyenRunning)
+	//	{
+	//		dctt = true;
+	//		isAutoPlay2 = true;
+	//		isAutoDichChuyenRunning = true;
+	//		new Thread(AutoDichChuyen).Start();
+	//	}
 
-		// Thêm auto khác nếu có...
-	}
+	//	// Thêm auto khác nếu có...
+	//}
 
-	public static void savecharid(int id)
-	{
-		string[] result = new string[] { id.ToString() };
-		AppendNumbers(path, result);
-	}
+	//public static void savecharid(int id)
+	//{
+	//	string[] result = new string[] { id.ToString() };
+	//	AppendNumbers(path, result);
+	//}
 
-	public static void AppendNumbers(string filePath, string[] newNumbers)
-	{
-		string newData = string.Join(",", newNumbers);
+	//public static void AppendNumbers(string filePath, string[] newNumbers)
+	//{
+	//	string newData = string.Join(",", newNumbers);
 
-		if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
-		{
-			File.WriteAllText(filePath, newData);
-		}
-		else
-		{
-			File.AppendAllText(filePath, "," + newData);
-		}
-	}
+	//	if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
+	//	{
+	//		File.WriteAllText(filePath, newData);
+	//	}
+	//	else
+	//	{
+	//		File.AppendAllText(filePath, "," + newData);
+	//	}
+	//}
 
-	public static int[] ReadNumbers(string filePath)
-	{
-		if (!File.Exists(filePath)) return new int[0];
+	//public static int[] ReadNumbers(string filePath)
+	//{
+	//	if (!File.Exists(filePath)) return new int[0];
 
-		string content = File.ReadAllText(filePath);
-		return content
-			.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-			.Select(int.Parse)
-			.ToArray();
-	}
+	//	string content = File.ReadAllText(filePath);
+	//	return content
+	//		.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+	//		.Select(int.Parse)
+	//		.ToArray();
+	//}
 
-	public static string path = "data.txt";
+	//public static string path = "data.txt";
 
-	public static void AutoDichChuyen()
-	{
-		int[] charID = new int[] { 0 };
-		if (!File.Exists(path)) return;
-		if (Char.myCharz().charFocus == null)
-		{
+	//public static void AutoDichChuyen()
+	//{
+	//	int[] charID = new int[] { 0 };
+	//	if (!File.Exists(path)) return;
+	//	if (Char.myCharz().charFocus == null)
+	//	{
 
-			if (new FileInfo(path).Length > 0)
-			{
-				charID = ReadNumbers(path);
-			}
-		}
+	//		if (new FileInfo(path).Length > 0)
+	//		{
+	//			charID = ReadNumbers(path);
+	//		}
+	//	}
 
-		// Auto dịch chuyển
-		int i = 0;
-		while (dctt)
-		{
-			if (i >= charID.Length)
-				break;
+	//	// Auto dịch chuyển
+	//	int i = 0;
+	//	while (dctt)
+	//	{
+	//		if (i >= charID.Length)
+	//			break;
 
-			int id = charID[i];
-			if (GameScr.findCharInMap(id) == null)
-			{
-				DichChuyen(id);
-			}
+	//		int id = charID[i];
+	//		if (GameScr.findCharInMap(id) == null)
+	//		{
+	//			DichChuyen(id);
+	//		}
 
 
-			if (!dctt)
-				break;
+	//		if (!dctt)
+	//			break;
 
-			Thread.Sleep(5000);
-		}
+	//		Thread.Sleep(5000);
+	//	}
 
-		isAutoDichChuyenRunning = false;
-	}
+	//	isAutoDichChuyenRunning = false;
+	//}
 
-	public static int FindYardrat()
-	{
-		for (int i = 0; i < Char.myCharz().arrItemBag.Length; i++)
-		{
-			var item = Char.myCharz().arrItemBag[i];
-			if (item != null && item.template != null && item.template.name != null && item.template.name.Contains("Yardrat"))
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
+	//public static int FindYardrat()
+	//{
+	//	for (int i = 0; i < Char.myCharz().arrItemBag.Length; i++)
+	//	{
+	//		var item = Char.myCharz().arrItemBag[i];
+	//		if (item != null && item.template != null && item.template.name != null && item.template.name.Contains("Yardrat"))
+	//		{
+	//			return i;
+	//		}
+	//	}
+	//	return -1;
+	//}
 
-	public static void DichChuyen(int CharID) {
-		Item[] arrItembody = global::Char.myCharz().arrItemBag;
-		if(arrItembody[5] == null) {
-			Service.gI().getItem(4, (sbyte)FindYardrat());
-			Service.gI().gotoPlayer(CharID);
-			Service.gI().getItem(5,5);
-			return ;
-		}
-		if(arrItembody[5].template.name.Contains("Yardrat")) {
-			Service.gI().gotoPlayer(CharID);
-			return ;
-		}
-		if(!arrItembody[5].template.name.Contains("Yardrat")) {
-			Service.gI().getItem(4, (sbyte)FindYardrat());
-			Service.gI().gotoPlayer(CharID);
-			Service.gI().getItem(4, (sbyte)FindYardrat());
-		}
-	}
+	//public static void DichChuyen(int CharID) {
+	//	Item[] arrItembody = global::Char.myCharz().arrItemBag;
+	//	if(arrItembody[5] == null) {
+	//		Service.gI().getItem(4, (sbyte)FindYardrat());
+	//		Service.gI().gotoPlayer(CharID);
+	//		Service.gI().getItem(5,5);
+	//		return ;
+	//	}
+	//	if(arrItembody[5].template.name.Contains("Yardrat")) {
+	//		Service.gI().gotoPlayer(CharID);
+	//		return ;
+	//	}
+	//	if(!arrItembody[5].template.name.Contains("Yardrat")) {
+	//		Service.gI().getItem(4, (sbyte)FindYardrat());
+	//		Service.gI().gotoPlayer(CharID);
+	//		Service.gI().getItem(4, (sbyte)FindYardrat());
+	//	}
+	//}
 
 
 	// memod
@@ -6971,44 +6971,44 @@ public class GameScr : mScreen, IChatable
 				Service.gI().chatPlayer(text, info2.playerID);
 			}
 		}
-		else if (!text.Equals(string.Empty))
-		{
-			switch (text)
-			{
-				case "gsm":
-					dctt = !dctt;
-					isAutoPlay2 = dctt;
-					canAutoPlay2 = dctt;
+		//else if (!text.Equals(string.Empty))
+		//{
+		//	switch (text)
+		//	{
+		//		case "gsm":
+		//			dctt = !dctt;
+		//			isAutoPlay2 = dctt;
+		//			canAutoPlay2 = dctt;
 
-					if (dctt && !isAutoDichChuyenRunning)  // Chỉ tạo thread nếu chưa có thread nào chạy
-					{
-						isAutoDichChuyenRunning = true;
-						new Thread(AutoDichChuyen).Start();
-						GameScr.info1.addInfo("BUINHIKHANG gsm: Bật", 0);
-					}
-					else if (!dctt && isAutoDichChuyenRunning)  // Nếu tắt auto thì dừng thread
-					{
-						isAutoDichChuyenRunning = false;
-						GameScr.info1.addInfo("BUINHIKHANG gsm: Tắt", 0);
-					}
-					else
-					{
-						GameScr.info1.addInfo("BUINHIKHANG gsm: Thread đang chạy, không cần khởi động lại.", 0);
-					}
-					break;
-				case "alogin":
-					alogin = !alogin;
-					GameScr.info1.addInfo("BUINHIKHANG auto login: " + (alogin ? "Bật" : "Tắt"), 0);
-					break;
-				case "g":
-					GameScr.info1.addInfo("BUINHIKHANG Đã lưu id người chơi: " + Char.myCharz().charFocus, 0);
-					savecharid(Char.myCharz().charID);
-					break;
-				default:
-					Service.gI().chat(text);
-					break;
-			}
-		}
+		//			if (dctt && !isAutoDichChuyenRunning)  // Chỉ tạo thread nếu chưa có thread nào chạy
+		//			{
+		//				isAutoDichChuyenRunning = true;
+		//				new Thread(AutoDichChuyen).Start();
+		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Bật", 0);
+		//			}
+		//			else if (!dctt && isAutoDichChuyenRunning)  // Nếu tắt auto thì dừng thread
+		//			{
+		//				isAutoDichChuyenRunning = false;
+		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Tắt", 0);
+		//			}
+		//			else
+		//			{
+		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Thread đang chạy, không cần khởi động lại.", 0);
+		//			}
+		//			break;
+		//		case "alogin":
+		//			alogin = !alogin;
+		//			GameScr.info1.addInfo("BUINHIKHANG auto login: " + (alogin ? "Bật" : "Tắt"), 0);
+		//			break;
+		//		case "g":
+		//			GameScr.info1.addInfo("BUINHIKHANG Đã lưu id người chơi: " + Char.myCharz().charFocus, 0);
+		//			savecharid(Char.myCharz().charID);
+		//			break;
+		//		default:
+		//			Service.gI().chat(text);
+		//			break;
+		//	}
+		//}
 	}
 //
 	public void onCancelChat()

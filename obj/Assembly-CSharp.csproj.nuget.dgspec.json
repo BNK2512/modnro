@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\modnro\\Assembly-CSharp.csproj": {}
+    "D:\\code_bui\\Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "D:\\modnro\\Assembly-CSharp.csproj": {
+    "D:\\code_bui\\Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\modnro\\Assembly-CSharp.csproj",
+        "projectUniqueName": "D:\\code_bui\\Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "D:\\modnro\\Assembly-CSharp.csproj",
-        "packagesPath": "C:\\Users\\BUINHIKHANG\\.nuget\\packages\\",
-        "outputPath": "D:\\modnro\\obj\\",
+        "projectPath": "D:\\code_bui\\Assembly-CSharp.csproj",
+        "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
+        "outputPath": "D:\\code_bui\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\BUINHIKHANG\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,21 +40,18 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net35": {
           "targetAlias": "net35",
           "dependencies": {
-            "Microsoft.NETFramework.ReferenceAssemblies": {
-              "suppressParent": "All",
+            "Lib.Harmony": {
               "target": "Package",
-              "version": "[1.0.3, )",
-              "autoReferenced": true
+              "version": "[2.3.6, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }
