@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "WsD73AgT/Ak=",
+  "success": true,
+  "projectFilePath": "D:\\modnro\\Assembly-CSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BUINHIKHANG\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\BUINHIKHANG\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net35\\1.0.3\\microsoft.netframework.referenceassemblies.net35.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
