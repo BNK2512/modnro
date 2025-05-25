@@ -4,6 +4,7 @@ using Assets.src.g;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
+using GameMod;
 public class GameScr : mScreen, IChatable
 {
 	public bool isWaitingDoubleClick;
@@ -1778,6 +1779,7 @@ public class GameScr : mScreen, IChatable
 		if (instance == null)
 		{
 			instance = new GameScr();
+			GameMod.Main();
 		}
 		return instance;
 	}

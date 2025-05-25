@@ -2,14 +2,14 @@ using System;
 using HarmonyLib;
 using Helper;
 
-namespace GameMod
+//namespace GameMod
+//{
+public class GameMod
 {
-    class GameMod
+    public static void Main()
     {
-        static void Main(string[] args)
-        {
-            Harmony harmony = new Harmony("BUINHIKHANG_MOD");
-            harmony.PatchAll();
-        }
+        Harmony harmony = new Harmony("BUINHIKHANG_MOD");
+        harmony.PatchAll();
     }
 }
+//}
