@@ -501,23 +501,23 @@ public class ServerListScreen : mScreen, IActionListener
 			GameCanvas.startOK("login quá 5 lần vẫn không đăng nhập được", 8884, null);
 			return;
 		} else
-		if (GameScr.alogin)
-		{
-			time_++;
-			bool a = this.time_ == 200;
-			if (a)
-			{
-				try
-				{
-					Login_New();
-					time_ = 0;
-				}
-				catch
-				{
-					logintime_++;
-				}
-			}
-		}
+		// if (GameScr.alogin)
+		// {
+		// 	time_++;
+		// 	bool a = this.time_ == 200;
+		// 	if (a)
+		// 	{
+		// 		try
+		// 		{
+		// 			Login_New();
+		// 			time_ = 0;
+		// 		}
+		// 		catch
+		// 		{
+		// 			logintime_++;
+		// 		}
+		// 	}
+		// }
 		if (waitToLogin)
 		{
 			tWaitToLogin++;
