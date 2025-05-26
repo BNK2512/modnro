@@ -13,7 +13,7 @@ namespace Patch
         static AccessTools.FieldRef<GameScr, bool> isAutoPlay2Ref = AccessTools.FieldRefAccess<GameScr, bool>("isAutoPlay2");
         static AccessTools.FieldRef<GameScr, bool> canAutoPlay2Ref = AccessTools.FieldRefAccess<GameScr, bool>("canAutoPlay2");
 
-        static void Prefix(GameScr __instance, string __text)
+        static void Prefix(string __text, string __to, GameScr __instance)
         {
             if (!string.IsNullOrEmpty(__text))
             {
@@ -55,6 +55,7 @@ namespace Patch
                         break;
                 }
             }
+            else __instance.onChatFromMe(__text, __to);
         }
     }
 }

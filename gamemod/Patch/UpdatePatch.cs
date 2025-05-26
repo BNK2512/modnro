@@ -15,6 +15,7 @@ namespace Patch
                 CommonExtendsion.isAutoDCTTStarted = true;
                 CommonExtendsion.StartAllAuto(__instance, isAutoPlay2Ref);
             }
+            else __instance.update();
         }
     }
 }
