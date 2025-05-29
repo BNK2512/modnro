@@ -4,6 +4,7 @@ using Assets.src.g;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
+using MeMod;
 public class GameScr : mScreen, IChatable
 {
 	public bool isWaitingDoubleClick;
@@ -1778,7 +1779,8 @@ public class GameScr : mScreen, IChatable
 		if (instance == null)
 		{
 			instance = new GameScr();
-			GameMod.Main();
+			//GameMod.Main();
+			MeMod.ModMain.Main();
 		}
 		return instance;
 	}
@@ -6972,44 +6974,10 @@ public class GameScr : mScreen, IChatable
 				Service.gI().chatPlayer(text, info2.playerID);
 			}
 		}
-		//else if (!text.Equals(string.Empty))
-		//{
-		//	switch (text)
-		//	{
-		//		case "gsm":
-		//			dctt = !dctt;
-		//			isAutoPlay2 = dctt;
-		//			canAutoPlay2 = dctt;
-
-		//			if (dctt && !isAutoDichChuyenRunning)  // Chỉ tạo thread nếu chưa có thread nào chạy
-		//			{
-		//				isAutoDichChuyenRunning = true;
-		//				new Thread(AutoDichChuyen).Start();
-		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Bật", 0);
-		//			}
-		//			else if (!dctt && isAutoDichChuyenRunning)  // Nếu tắt auto thì dừng thread
-		//			{
-		//				isAutoDichChuyenRunning = false;
-		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Tắt", 0);
-		//			}
-		//			else
-		//			{
-		//				GameScr.info1.addInfo("BUINHIKHANG gsm: Thread đang chạy, không cần khởi động lại.", 0);
-		//			}
-		//			break;
-		//		case "alogin":
-		//			alogin = !alogin;
-		//			GameScr.info1.addInfo("BUINHIKHANG auto login: " + (alogin ? "Bật" : "Tắt"), 0);
-		//			break;
-		//		case "g":
-		//			GameScr.info1.addInfo("BUINHIKHANG Đã lưu id người chơi: " + Char.myCharz().charFocus, 0);
-		//			savecharid(Char.myCharz().charID);
-		//			break;
-		//		default:
-		//			Service.gI().chat(text);
-		//			break;
-		//	}
-		//}
+		else if (!text.Equals(string.Empty))
+		{
+			Service.gI().chat(text);
+		}
 	}
 //
 	public void onCancelChat()

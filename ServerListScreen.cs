@@ -496,28 +496,28 @@ public class ServerListScreen : mScreen, IActionListener
 	public int logintime_ = 0;
 	public override void update()
 	{
-		if (logintime_ > 5)
-		{
-			GameCanvas.startOK("login quá 5 lần vẫn không đăng nhập được", 8884, null);
-			return;
-		} else
-		if (GameScr.alogin)
-		{
-			time_++;
-			bool a = this.time_ == 200;
-			if (a)
-			{
-				try
-				{
-					Login_New();
-					time_ = 0;
-				}
-				catch
-				{
-					logintime_++;
-				}
-			}
-		}
+		// if (logintime_ > 5)
+		// {
+		// 	GameCanvas.startOK("login quá 5 lần vẫn không đăng nhập được", 8884, null);
+		// 	return;
+		// } else
+		// if (GameScr.alogin)
+		// {
+		// 	time_++;
+		// 	bool a = this.time_ == 200;
+		// 	if (a)
+		// 	{
+		// 		try
+		// 		{
+		// 			Login_New();
+		// 			time_ = 0;
+		// 		}
+		// 		catch
+		// 		{
+		// 			logintime_++;
+		// 		}
+		// 	}
+		// }
 		if (waitToLogin)
 		{
 			tWaitToLogin++;

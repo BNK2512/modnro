@@ -7,3 +7,5 @@ D:\modnro\bin\Debug\net35\UnityEngine.dll
 D:\modnro\obj\Debug\net35\Assembly.44154EF1.Up2Date
 D:\modnro\obj\Debug\net35\Assembly-CSharp.dll
 D:\modnro\obj\Debug\net35\Assembly-CSharp.pdb
+D:\modnro\obj\Debug\net35\Assembly-CSharp.sourcelink.json
+D:\modnro\bin\Debug\net35\0Harmony.dll
