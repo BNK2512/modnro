@@ -6,6 +6,7 @@ using HarmonyLib;
 using Helpers;
 
 namespace MeMod;
+
 public class AutoHandler
 {
     public static int FindYardrat()
@@ -23,8 +24,7 @@ public class AutoHandler
 
     public static void DichChuyen(int CharID)
     {
-        Funcs.Log("dich chuyehnnnn");
-        Item[] arrItembody = Char.myCharz().arrItemBag;
+        Item[] arrItembody = global::Char.myCharz().arrItemBag;
         if (arrItembody[5] == null)
         {
             Service.gI().getItem(4, (sbyte)FindYardrat());
@@ -45,16 +45,15 @@ public class AutoHandler
         }
     }
 
-        public static void AutoDichChuyen()
+    public static void AutoDichChuyen()
     {
         int[] charID = new int[] { 0 };
+
         if (Char.myCharz().charFocus == null && File.Exists(Gl.path) && new FileInfo(Gl.path).Length > 0)
         {
-            charID = ReadNumbers(Gl.path);
+            charID = Funcs.ReadNumbers(Gl.path);
         }
 
-
-        // Auto dịch chuyển
         int i = 0;
         while (Gl.dctt)
         {
@@ -64,10 +63,9 @@ public class AutoHandler
 
             int id = charID[i];
             if (GameScr.findCharInMap(id) == null)
-            { 
+            {
                 DichChuyen(id);
             }
-
 
             if (!Gl.dctt)
                 break;
@@ -78,48 +76,90 @@ public class AutoHandler
         Gl.isAutoDichChuyenRunning = false;
     }
 
-    public static int[] ReadNumbers(string filePath)
-    {
-        if (!File.Exists(filePath)) return new int[0];
-
-        string content = File.ReadAllText(filePath);
-        return content
-            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(int.Parse)
-            .ToArray();
-    }
-
     public static void savecharid(int id)
     {
         string[] result = new string[] { id.ToString() };
-        AppendNumbers(Gl.path, result);
+        Funcs.AppendNumbers(Gl.path, result);
     }
 
-    public static void AppendNumbers(string filePath, string[] newNumbers)
-    {
-        string newData = string.Join(",", newNumbers);
-
-        if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
-        {
-            File.WriteAllText(filePath, newData);
-        }
-        else
-        {
-            File.AppendAllText(filePath, "," + newData);
-        }
-    }
-    public static void StartAllAuto(GameScr __instance, AccessTools.FieldRef<GameScr, bool> isAutoPlay2Ref)
+    public static void StartAllAuto()
     {
         if (!Gl.isAutoDichChuyenRunning)
         {
             Gl.dctt = true;
-            //isAutoPlay2 = true;
-            isAutoPlay2Ref(__instance) = true;
             Gl.isAutoDichChuyenRunning = true;
             new Thread(AutoDichChuyen).Start();
         }
 
         // Thêm auto khác nếu có...
     }
+
+    // ---- Hỗ trợ ----
+
+    public static bool hasBeanInBag()
+    {
+        foreach (Item item in Char.myCharz().arrItemBag)
+        {
+            if (item != null && item.template.type == 6) return true;
+        }
+        return false;
+    }
+
+    private Mob findClosestMob()
+    {
+        Mob closest = null;
+        int minDist = int.MaxValue;
+
+        for (int i = 0; i < GameScr.vMob.size(); i++)
+        {
+            Mob m = (Mob)GameScr.vMob.elementAt(i);
+            if (m != null && m.hp > 0 && m.status != 0 && m.status != 1 && !m.isMobMe)
+            {
+                int dist = Math.abs(m.x - Char.myCharz().cx) + Math.abs(m.y - Char.myCharz().cy);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = m;
+                }
+            }
+        }
+        return closest;
+    }
+
+    private Skill getBestAvailableSkill()
+    {
+        Skill best = null;
+        Skill[] skills = GameCanvas.isTouch ? GameScr.onScreenSkill : GameScr.keySkill;
+
+        foreach (Skill s in skills)
+        {
+            if (s == null || s.paintCanNotUseSkill || s.template.isSkillSpec() || Char.myCharz().skillInfoPaint() != null)
+                continue;
+
+            long mpRequired = (s.template.manaUseType == 2) ? 1 :
+                            (s.template.manaUseType == 1) ? (s.manaUse * Char.myCharz().cMPFull / 100) :
+                            s.manaUse;
+
+            if (Char.myCharz().cMP >= mpRequired && s.coolDown == 0)
+            {
+                if (best == null || s.point > best.point) // Ưu tiên mạnh hơn
+                {
+                    best = s;
+                }
+            }
+        }
+        return best;
+    }
+
+    public static void moveTo(int x, int y)
+    {
+        if (Math.abs(Char.myCharz().cx - x) > 10 || Math.abs(Char.myCharz().cy - y) > 10)
+        {
+            Char.myCharz().cx = x;
+            Char.myCharz().cy = y;
+            Service.gI().charMove();
+        }
+    }
+
 }
 

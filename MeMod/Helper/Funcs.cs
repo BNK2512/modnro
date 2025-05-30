@@ -17,6 +17,11 @@ namespace Helpers
             catch { }
         }
 
+        public static void Debug(string message)
+        {
+            GameScr.info1.addInfo("[DEBUG] " + message, 0);
+        }
+
         public static void SafeSleep(int milliseconds)
         {
             try

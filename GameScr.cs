@@ -4070,52 +4070,6 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	public static bool isAutoPlay2;
-	public static bool canAutoPlay2;
-	private void autoPlay2() {
-		if (!canAutoPlay2 || Char.myCharz().meDead || Char.myCharz().isCharge || Char.myCharz().isFlyAndCharge || Char.myCharz().isUseChargeSkill())
-			return;
-
-		// Tìm quái gần nhất còn sống
-		Mob nearestMob = null;
-		int minDistance = int.MaxValue;
-		for (int i = 0; i < vMob.size(); i++) {
-			Mob mob = (Mob) vMob.elementAt(i);
-			if (mob != null && mob.hp > 0 && mob.status != 0 && mob.status != 1 && !mob.isMobMe) {
-				int distance = Math.abs(Char.myCharz().cx - mob.x) + Math.abs(Char.myCharz().cy - mob.y);
-				if (distance < minDistance) {
-					minDistance = distance;
-					nearestMob = mob;
-				}
-			}
-		}
-
-		if (nearestMob == null)
-			return;
-
-		Char.myCharz().mobFocus = nearestMob;
-		Char.myCharz().cx = nearestMob.x;
-		Char.myCharz().cy = nearestMob.y;
-		Service.gI().charMove();
-
-		// Skill 1 và 2
-		Skill skill = null;
-		Skill[] skills = GameCanvas.isTouch ? onScreenSkill : keySkill;
-
-		for (int i = 0; i < 2; i++) {
-			if (skills[i] != null && !skills[i].paintCanNotUseSkill && Char.myCharz().cMP >= skills[i].manaUse) {
-				skill = skills[i];
-				break; // Ưu tiên skill 1, nếu không đủ thì dùng skill 2
-			}
-		}
-
-		if (skill != null) {
-			doSelectSkill(skill, true);
-			doDoubleClickToObj(Char.myCharz().mobFocus);
-			Char.myCharz().mobFocus = null; // Đánh xong đổi quái
-		}
-	}
-
 	private void doFire(bool isFireByShortCut, bool skipWaypoint)
 	{
 		tam++;
@@ -4782,17 +4736,17 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	//public static bool isAutoDCTTStarted = false;
+	public static bool isAutoDCTTStarted = false;
 
 	//vong lap
 	public override void update()
 	{
-		// memod
-		//if (!isAutoDCTTStarted && !Char.isLoadingMap)
-		//{
-		//	isAutoDCTTStarted = true;
-		//	StartAllAuto();
-		//}
+		//memod
+		// if (!isAutoDCTTStarted && !Char.isLoadingMap)
+		// {
+		// 	isAutoDCTTStarted = true;
+		// 	StartAllAuto();
+		// }
 		if (GameCanvas.keyPressed[16])
 		{
 			GameCanvas.keyPressed[16] = false;
@@ -4820,14 +4774,7 @@ public class GameScr : mScreen, IChatable
 		{
 			autoPlay();
 		}
-		if (isAutoPlay2 && GameCanvas.gameTick % 50 == 0)
-		{
-			autoPlay2();
-		} 
-		// if (dctt && Char.myCharz().meDead)
-		// {
-		// 	Service.gI().returnTownFromDead();
-		// }
+
 		updateXoSo();
 		mSystem.checkAdComlete();
 		SmallImage.update();
@@ -6839,127 +6786,127 @@ public class GameScr : mScreen, IChatable
 	{
 	}
 
-	// memod
-	//public static bool dctt = false;
-	//public static bool isAutoDichChuyenRunning = false;
-	//public static bool alogin = true;
+	// //memod
+	// public static bool dctt = false;
+	// public static bool isAutoDichChuyenRunning = false;
+	// public static bool alogin = true;
 
-	//public static void StartAllAuto()
-	//{
-	//	if (!isAutoDichChuyenRunning)
-	//	{
-	//		dctt = true;
-	//		isAutoPlay2 = true;
-	//		isAutoDichChuyenRunning = true;
-	//		new Thread(AutoDichChuyen).Start();
-	//	}
+	// public static void StartAllAuto()
+	// {
+	// 	if (!isAutoDichChuyenRunning)
+	// 	{
+	// 		dctt = true;
+	// 		isAutoPlay2 = true;
+	// 		isAutoDichChuyenRunning = true;
+	// 		new Thread(AutoDichChuyen).Start();
+	// 	}
 
-	//	// Thêm auto khác nếu có...
-	//}
+	// 	// Thêm auto khác nếu có...
+	// }
 
-	//public static void savecharid(int id)
-	//{
-	//	string[] result = new string[] { id.ToString() };
-	//	AppendNumbers(path, result);
-	//}
+	// public static void savecharid(int id)
+	// {
+	// 	string[] result = new string[] { id.ToString() };
+	// 	AppendNumbers(path, result);
+	// }
 
-	//public static void AppendNumbers(string filePath, string[] newNumbers)
-	//{
-	//	string newData = string.Join(",", newNumbers);
+	// public static void AppendNumbers(string filePath, string[] newNumbers)
+	// {
+	// 	string newData = string.Join(",", newNumbers);
 
-	//	if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
-	//	{
-	//		File.WriteAllText(filePath, newData);
-	//	}
-	//	else
-	//	{
-	//		File.AppendAllText(filePath, "," + newData);
-	//	}
-	//}
+	// 	if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
+	// 	{
+	// 		File.WriteAllText(filePath, newData);
+	// 	}
+	// 	else
+	// 	{
+	// 		File.AppendAllText(filePath, "," + newData);
+	// 	}
+	// }
 
-	//public static int[] ReadNumbers(string filePath)
-	//{
-	//	if (!File.Exists(filePath)) return new int[0];
+	// public static int[] ReadNumbers(string filePath)
+	// {
+	// 	if (!File.Exists(filePath)) return new int[0];
 
-	//	string content = File.ReadAllText(filePath);
-	//	return content
-	//		.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-	//		.Select(int.Parse)
-	//		.ToArray();
-	//}
+	// 	string content = File.ReadAllText(filePath);
+	// 	return content
+	// 		.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+	// 		.Select(int.Parse)
+	// 		.ToArray();
+	// }
 
-	//public static string path = "data.txt";
+	// public static string path = "data.txt";
 
-	//public static void AutoDichChuyen()
-	//{
-	//	int[] charID = new int[] { 0 };
-	//	if (!File.Exists(path)) return;
-	//	if (Char.myCharz().charFocus == null)
-	//	{
+	// public static void AutoDichChuyen()
+	// {
+	// 	int[] charID = new int[] { 0 };
+	// 	if (!File.Exists(path)) return;
+	// 	if (Char.myCharz().charFocus == null)
+	// 	{
 
-	//		if (new FileInfo(path).Length > 0)
-	//		{
-	//			charID = ReadNumbers(path);
-	//		}
-	//	}
+	// 		if (new FileInfo(path).Length > 0)
+	// 		{
+	// 			charID = ReadNumbers(path);
+	// 		}
+	// 	}
 
-	//	// Auto dịch chuyển
-	//	int i = 0;
-	//	while (dctt)
-	//	{
-	//		if (i >= charID.Length)
-	//			break;
+	// 	// Auto dịch chuyển
+	// 	int i = 0;
+	// 	while (dctt)
+	// 	{
+	// 		if (i >= charID.Length)
+	// 			break;
 
-	//		int id = charID[i];
-	//		if (GameScr.findCharInMap(id) == null)
-	//		{
-	//			DichChuyen(id);
-	//		}
-
-
-	//		if (!dctt)
-	//			break;
-
-	//		Thread.Sleep(5000);
-	//	}
-
-	//	isAutoDichChuyenRunning = false;
-	//}
-
-	//public static int FindYardrat()
-	//{
-	//	for (int i = 0; i < Char.myCharz().arrItemBag.Length; i++)
-	//	{
-	//		var item = Char.myCharz().arrItemBag[i];
-	//		if (item != null && item.template != null && item.template.name != null && item.template.name.Contains("Yardrat"))
-	//		{
-	//			return i;
-	//		}
-	//	}
-	//	return -1;
-	//}
-
-	//public static void DichChuyen(int CharID) {
-	//	Item[] arrItembody = global::Char.myCharz().arrItemBag;
-	//	if(arrItembody[5] == null) {
-	//		Service.gI().getItem(4, (sbyte)FindYardrat());
-	//		Service.gI().gotoPlayer(CharID);
-	//		Service.gI().getItem(5,5);
-	//		return ;
-	//	}
-	//	if(arrItembody[5].template.name.Contains("Yardrat")) {
-	//		Service.gI().gotoPlayer(CharID);
-	//		return ;
-	//	}
-	//	if(!arrItembody[5].template.name.Contains("Yardrat")) {
-	//		Service.gI().getItem(4, (sbyte)FindYardrat());
-	//		Service.gI().gotoPlayer(CharID);
-	//		Service.gI().getItem(4, (sbyte)FindYardrat());
-	//	}
-	//}
+	// 		int id = charID[0];
+	// 		if (GameScr.findCharInMap(id) == null)
+	// 		{
+	// 			DichChuyen(id);
+	// 		}
 
 
-	// memod
+	// 		if (!dctt)
+	// 			break;
+
+	// 		Thread.Sleep(5000);
+	// 	}
+
+	// 	isAutoDichChuyenRunning = false;
+	// }
+
+	// public static int FindYardrat()
+	// {
+	// 	for (int i = 0; i < Char.myCharz().arrItemBag.Length; i++)
+	// 	{
+	// 		var item = Char.myCharz().arrItemBag[i];
+	// 		if (item != null && item.template != null && item.template.name != null && item.template.name.Contains("Yardrat"))
+	// 		{
+	// 			return i;
+	// 		}
+	// 	}
+	// 	return -1;
+	// }
+
+	// public static void DichChuyen(int CharID) {
+	// 	Item[] arrItembody = global::Char.myCharz().arrItemBag;
+	// 	if(arrItembody[5] == null) {
+	// 		Service.gI().getItem(4, (sbyte)FindYardrat());
+	// 		Service.gI().gotoPlayer(CharID);
+	// 		Service.gI().getItem(5,5);
+	// 		return ;
+	// 	}
+	// 	if(arrItembody[5].template.name.Contains("Yardrat")) {
+	// 		Service.gI().gotoPlayer(CharID);
+	// 		return ;
+	// 	}
+	// 	if(!arrItembody[5].template.name.Contains("Yardrat")) {
+	// 		Service.gI().getItem(4, (sbyte)FindYardrat());
+	// 		Service.gI().gotoPlayer(CharID);
+	// 		Service.gI().getItem(4, (sbyte)FindYardrat());
+	// 	}
+	// }
+
+
+	//memod
 	public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");

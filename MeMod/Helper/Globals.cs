@@ -9,8 +9,9 @@ namespace Helpers
         public static bool ak = false;
         public static bool canak = false;
         public static string path = "data.txt";
-
-        public static string[] allowedChat = ["gsm", "g", "alogin", "ak"];
+        public static string[] allowedChat = ["gsm", "g", "alogin", "ak","bg"];
+        public static bool bg = false;
+	    public static int logintime_ = 0;
     }
 }
 
