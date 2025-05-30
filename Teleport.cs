@@ -172,6 +172,13 @@ public class Teleport
 
 	public void update()
 	{
+		// Ẩn tàu bay của người khác
+		if (!isMe) return;
+
+		if (Char.isLoadingMap || x < GameScr.cmx || x > GameScr.cmx + GameCanvas.w)
+		{
+			return;
+		}
 		if (planet > 2 && paintFire && y != -80)
 		{
 			if (isDown && tPrepare == 0)
@@ -197,7 +204,8 @@ public class Teleport
 			painHead = ((type != 0) ? true : false);
 			if (planet < 3)
 			{
-				int num = y2 - y >> 3;
+				// int num = y2 - y >> 3;
+    			int num = (y2 - y) >> 1; // Bay nhanh hơn (tăng tốc độ rơi)
 				if (num < 1)
 				{
 					num = 1;
@@ -209,7 +217,8 @@ public class Teleport
 			{
 				if (GameCanvas.gameTick % 2 == 0)
 				{
-					vy++;
+					// vy++;
+        			vy += 3; // Tăng tốc độ bay cho tàu hành tinh > 2
 				}
 				if (y2 - y < vy)
 				{
@@ -304,7 +313,8 @@ public class Teleport
 			tPrepare++;
 			if (tPrepare > 30)
 			{
-				int num2 = y2 + 24 - y >> 3;
+				//int num2 = y2 + 24 - y >> 3;
+				int num2 = y2 + 24 - y >> 1; // cho tàu bay lên nhanh hơn
 				if (num2 > 30)
 				{
 					num2 = 30;

@@ -9,6 +9,17 @@ namespace MeMod;
 
 public class AutoHandler
 {
+    public static void StartAllAuto()
+    {
+        if (!Gl.isAutoDichChuyenRunning)
+        {
+            Gl.dctt = true;
+            Gl.isAutoDichChuyenRunning = true;
+            new Thread(AutoDichChuyen).Start();
+        }
+
+        // Thêm auto khác nếu có...
+    }
     public static int FindYardrat()
     {
         for (int i = 0; i < Char.myCharz().arrItemBag.Length; i++)
@@ -58,8 +69,7 @@ public class AutoHandler
         while (Gl.dctt)
         {
 
-            if (i >= charID.Length)
-                break;
+            if (i >= charID.Length) break;
 
             int id = charID[i];
             if (GameScr.findCharInMap(id) == null)
@@ -80,18 +90,6 @@ public class AutoHandler
     {
         string[] result = new string[] { id.ToString() };
         Funcs.AppendNumbers(Gl.path, result);
-    }
-
-    public static void StartAllAuto()
-    {
-        if (!Gl.isAutoDichChuyenRunning)
-        {
-            Gl.dctt = true;
-            Gl.isAutoDichChuyenRunning = true;
-            new Thread(AutoDichChuyen).Start();
-        }
-
-        // Thêm auto khác nếu có...
     }
 
     // ---- Hỗ trợ ----

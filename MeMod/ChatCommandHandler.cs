@@ -14,9 +14,6 @@ public class Patch_onChatFromMe
         ["gsm"] = () =>
         {
             Gl.dctt = !Gl.dctt;
-            Gl.ak = Gl.dctt;
-            Gl.canak = Gl.dctt;
-            //Funcs.Log();
             if (Gl.dctt && !Gl.isAutoDichChuyenRunning)
             {
                 Gl.isAutoDichChuyenRunning = true;

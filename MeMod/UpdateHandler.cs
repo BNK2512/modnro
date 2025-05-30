@@ -4,17 +4,17 @@ using MeMod;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
 [HarmonyPatch(typeof(GameScr), "update")]
 public class Patch_GameScr_update
 {
     public static void Prefix()
     {
-        // if (!Gl.isAutoDCTTStarted && !Char.isLoadingMap)
-        // {
-        // 	Gl.isAutoDCTTStarted = true;
-        //     AutoHandler.StartAllAuto();
-        // }
+        if (Gl.isAutoDCTTStarted && !Char.isLoadingMap)
+        {
+            AutoHandler.StartAllAuto();
+        }
         if (Gl.dctt && Char.myCharz().meDead)
         {
             Service.gI().returnTownFromDead();
@@ -55,5 +55,14 @@ public class Patch_ServerListScreen_update
                 }
             }
         }
+    }
+}
+
+[HarmonyPatch(typeof(GameCanvas), "loadBG")]
+public class Patch_GameCanvas_update
+{
+    public static void Prefix()
+    {
+        GameCanvas.lowGraphic = Gl.bg;
     }
 }
