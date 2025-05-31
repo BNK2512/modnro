@@ -101,11 +101,11 @@ public class Main : MonoBehaviour
 			level = Rms.loadRMSInt("levelScreenKN");
 			if (level == 1)
 			{
-				Screen.SetResolution(1080, 720, fullscreen: false);
+				Screen.SetResolution(360, 360, fullscreen: false);
 			}
 			else
 			{
-				Screen.SetResolution(1080, 720, fullscreen: false);
+				Screen.SetResolution(360, 360, fullscreen: false);
 			}
 		}
 	}

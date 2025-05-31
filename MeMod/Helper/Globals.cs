@@ -2,9 +2,8 @@ namespace Helpers
 {
     public static class Gl
     {
-        public static bool dctt = true;
+        public static bool dctt = false;
         public static bool isAutoDCTTStarted = true;
-        public static bool isAutoDichChuyenRunning = false;
         public static bool alogin = true;
         public static bool ak = false;
         public static bool canak = false;

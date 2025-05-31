@@ -14,20 +14,14 @@ public class Patch_onChatFromMe
         ["gsm"] = () =>
         {
             Gl.dctt = !Gl.dctt;
-            if (Gl.dctt && !Gl.isAutoDichChuyenRunning)
+            if (Gl.dctt)
             {
-                Gl.isAutoDichChuyenRunning = true;
                 new Thread(AutoHandler.AutoDichChuyen).Start();
                 GameScr.info1.addInfo("Giảm sức mạnh: Bật", 0);
             }
-            else if (!Gl.dctt && Gl.isAutoDichChuyenRunning)
-            {
-                Gl.isAutoDichChuyenRunning = false;
-                GameScr.info1.addInfo("Giảm sức mạnh: Tắt", 0);
-            }
             else
             {
-                GameScr.info1.addInfo("Giảm sức mạnh: Thread đang chạy, không cần khởi động lại.", 0);
+                GameScr.info1.addInfo("Giảm sức mạnh: Tắt", 0);
             }
         },
         ["alogin"] = () =>

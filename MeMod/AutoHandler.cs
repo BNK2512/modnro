@@ -9,12 +9,14 @@ namespace MeMod;
 
 public class AutoHandler
 {
+    private static bool isStartAllAuto = false;
     public static void StartAllAuto()
     {
-        if (!Gl.isAutoDichChuyenRunning)
+        if (isStartAllAuto) return;
+        isStartAllAuto = true;
+        if (!Gl.dctt)
         {
             Gl.dctt = true;
-            Gl.isAutoDichChuyenRunning = true;
             new Thread(AutoDichChuyen).Start();
         }
 
@@ -35,6 +37,7 @@ public class AutoHandler
 
     public static void DichChuyen(int CharID)
     {
+        if (Char.myCharz().isTeleport) return;
         Item[] arrItembody = global::Char.myCharz().arrItemBag;
         if (arrItembody[5] == null)
         {
@@ -78,12 +81,14 @@ public class AutoHandler
             }
 
             if (!Gl.dctt)
+            {
                 break;
+            }
 
             Thread.Sleep(5000);
         }
 
-        Gl.isAutoDichChuyenRunning = false;
+
     }
 
     public static void savecharid(int id)
